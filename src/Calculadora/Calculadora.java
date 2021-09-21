@@ -1,7 +1,6 @@
 package Calculadora;
 
 import java.awt.*;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -14,15 +13,19 @@ import javax.swing.event.ChangeListener;
 
 public class Calculadora extends JFrame {
 
+	String Mcampo1 = "0";
+	String Mcampo2 = "0";
+
 	public Calculadora() {
 		super.setTitle("Calculadora");
-		
-		//cambiar icona App
+		 this.setLayout(new FlowLayout());
+
+		// cambiar icona App
 		Toolkit mipantalla = Toolkit.getDefaultToolkit();
 		Image miIcono = mipantalla.getImage("src\\Calculadora\\calculadora.png");
-		setIconImage (miIcono);
-		
-		//Caixes de text
+		setIconImage(miIcono);
+
+		// Caixes de text
 		JLabel Lbl1 = new JLabel("Primer operador");
 		JLabel Lbl2 = new JLabel("Segun operandor");
 		JLabel Lbl3 = new JLabel("Resultat");
@@ -31,11 +34,8 @@ public class Calculadora extends JFrame {
 		Lbl2.setHorizontalAlignment(JLabel.CENTER);
 		Lbl3.setHorizontalAlignment(JLabel.CENTER);
 		Lbl4.setHorizontalAlignment(JLabel.CENTER);
-		/*JLabel Lbl5 = new JLabel("Opciones del combo");
-		Lbl5.setHorizontalAlignment(JLabel.CENTER);
-		JLabel Lbl6 = new JLabel("Contenido TextArea");
-		Lbl6.setHorizontalAlignment(JLabel.CENTER);*/
-		//
+
+		// Peu
 		JLabel lnorte = new JLabel("Calculadora ITAcademi");
 		JLabel lsur = new JLabel("Copyright Todos los derechos reservados");
 
@@ -49,50 +49,33 @@ public class Calculadora extends JFrame {
 		menu.add(mi1);
 		menu.add(mi2);
 
-		
-		final JTextField campo1 = new JTextField(10);
+		// Variables
+		final JTextField campo1 = new JTextField();
 		final JTextField campo2 = new JTextField(10);
 		final JTextField resultado = new JTextField(10);
-		
-		//Botons
+		// campo1.setText(Integer.toString(Mcampo1));
+		// campo2.setText(Integer.toString(Mcampo2));
+
+		// Botons
 		JButton suma = new JButton("+");
 		JButton resta = new JButton("-");
 		JButton mult = new JButton("*");
 		JButton div = new JButton("/");
 		JButton modul = new JButton("%");
 		JButton sortir = new JButton("Sortir");
-		JButton borrar = new JButton("C");
-		//JButton Btn6 = new JButton("Color");
+		JButton borrar = new JButton("Clear");
+		JButton ms = new JButton("MS");
+		JButton mr = new JButton("MR");
+		JButton mc = new JButton("MC");
 
 		JList lista = new JList();
 		JComboBox combo = new JComboBox();
 		JTextArea jta = new JTextArea();
-		//JSpinner spinner = new JSpinner();
-		
-		/*Canviar font
-		
-		JRadioButton radio1 = new JRadioButton("Gabriola");
-		JRadioButton radio2 = new JRadioButton("Algerian");
-		JRadioButton radio3 = new JRadioButton("Helvetica");
-		ButtonGroup radioButtonGroup = new ButtonGroup();
-		radioButtonGroup.add(radio1);
-		radioButtonGroup.add(radio2);
-		radioButtonGroup.add(radio3);
-		
-		final Font a= new Font("Gabriola",Font.BOLD + Font.PLAIN,15);
-		final Font b= new Font("Algerian",Font.BOLD + Font.PLAIN,15);
-		final Font c= new Font("Helvetic",Font.BOLD + Font.PLAIN,15);
-		*/
-		
-		///////////////////////////////////////////////////////////
+
+		// Combo borrar llista
 
 		combo.addItem("Escoge una oprción");
-		//combo.addItem("Borrar textFields");
 		combo.addItem("borrar lista");
-		//combo.addItem("mostrar lista como texto");
-
-		//Checkbox check1 = new Checkbox("Texto rojo-negro");
-		//Checkbox check2 = new Checkbox("Bloquear Todo");
 
 		Container cp = getContentPane();
 		JPanel p1 = new JPanel();
@@ -103,7 +86,6 @@ public class Calculadora extends JFrame {
 		JPanel p6 = new JPanel();
 		JPanel Central = new JPanel();
 
-		// cp.setLayout(new GridLayout(6, 1));
 		cp.setLayout(new BorderLayout());
 
 		p1.setLayout(new GridLayout(2, 3));
@@ -114,9 +96,7 @@ public class Calculadora extends JFrame {
 		p6.setLayout(new GridLayout(2, 1));
 
 		Central.setLayout(new GridLayout(6, 1));
-		
-		// cp.add(p1); cp.add(p2); cp.add(p3); cp.add(p4); cp.add(p5); cp.add(p6);
-		 
+
 		Central.add(p1);
 		Central.add(p2);
 		Central.add(p3);
@@ -141,12 +121,13 @@ public class Calculadora extends JFrame {
 		p2.add(modul);
 		p2.add(sortir);
 		p3.add(borrar);
+		p3.add(ms);
+		p3.add(mr);
+		p3.add(mc);
 		p4.add(lista);
 		p5.add(Lbl4);
 		p6.add(combo);
-		//p5.add(Lbl5);
 		p6.add(jta);
-		//p6.add(Lbl6);
 		pack();
 		resultado.setEditable(false);
 
@@ -195,7 +176,7 @@ public class Calculadora extends JFrame {
 				lista.setListData(datos);
 			}
 		});
-		
+
 		modul.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int modul = 0;
@@ -206,18 +187,17 @@ public class Calculadora extends JFrame {
 				lista.setListData(datos);
 			}
 		});
-		
-		
+
 		combo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			if (combo.getSelectedIndex()==0) {
-				campo1.setText("");
-				campo2.setText("");
-				resultado.setText("");
-			}else if (combo.getSelectedIndex()==1) {
-				datos.clear();
-				lista.setListData(datos);
-			}
+				if (combo.getSelectedIndex() == 0) {
+					campo1.setText("");
+					campo2.setText("");
+					resultado.setText("");
+				} else if (combo.getSelectedIndex() == 1) {
+					datos.clear();
+					lista.setListData(datos);
+				}
 			}
 		});
 
@@ -228,15 +208,77 @@ public class Calculadora extends JFrame {
 				resultado.setText("");
 			}
 		});
+
+		// Borrar memoria
+		mc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				campo1.setText("");
+				campo2.setText("");
+				resultado.setText("");
+				Mcampo1 = "0";
+				Mcampo2 = "0";
+				// Verif consola
+
+				System.out.println(Mcampo1 + "-" + Mcampo2);
+			}
+
+		});
+
+		// Enregistrar Memoria
+		ms.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (campo1.getText() == "") {
+					campo2.setName("0");
+				} else {
+					Mcampo1 = campo1.getText();
+					//Mcampo1 = Integer.valueOf(campo1.getText());
+				}
+
+				if (campo2.getText() == "") {
+					campo2.setName("0");
+				} else {
+					Mcampo2 = campo2.getText();
+				}
+
+				// Verif consola
+
+				System.out.println(Mcampo1 + "-" + Mcampo2);
+			}
+
+		});
+
+		// Invocar memoria
+		mr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				campo1.setText(Mcampo1);
+				campo2.setText(Mcampo2);
+
+				//p1.add(campo1);
+				//p1.add(campo2);
+				// campo1.setText((Integer.toString(Mcampo1));
+				// campo2.setText("");
+
+				/*
+				 * if (campo1.getText()=="") { campo2.setName("0"); }else { Mcampo1 =
+				 * Integer.valueOf(campo1.getText()); }
+				 * 
+				 * if (campo2.getText()=="") { campo2.setName("0"); }else { Mcampo2 =
+				 * Integer.valueOf(campo2.getText()); }
+				 */
+
+				// Verif consola
+
+				System.out.println(Mcampo1 + "-" + Mcampo2);
+			}
+
+		});
+
 		sortir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		
-		
-
-		
 
 		// Exportar a texto
 
@@ -265,15 +307,13 @@ public class Calculadora extends JFrame {
 			}
 
 		});
-		
-		//menu salir
-		mi2.addActionListener(new ActionListener () {
-			public void actionPerformed (ActionEvent e) {
+
+		// menu salir
+		mi2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		
-		
 
 	}
 
