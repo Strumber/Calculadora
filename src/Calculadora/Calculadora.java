@@ -18,7 +18,7 @@ public class Calculadora extends JFrame {
 
 	public Calculadora() {
 		super.setTitle("Calculadora");
-		 this.setLayout(new FlowLayout());
+		this.setLayout(new FlowLayout());
 
 		// cambiar icona App
 		Toolkit mipantalla = Toolkit.getDefaultToolkit();
@@ -29,13 +29,13 @@ public class Calculadora extends JFrame {
 		JLabel Lbl1 = new JLabel("Primer operador");
 		JLabel Lbl2 = new JLabel("Segun operandor");
 		JLabel Lbl3 = new JLabel("Resultat");
-		JLabel Lbl4 = new JLabel("Lista resultats");
+		JLabel Lbl4 = new JLabel("Llista resultats");
 		Lbl1.setHorizontalAlignment(JLabel.CENTER);
 		Lbl2.setHorizontalAlignment(JLabel.CENTER);
 		Lbl3.setHorizontalAlignment(JLabel.CENTER);
 		Lbl4.setHorizontalAlignment(JLabel.CENTER);
 
-		// Peu
+		// Titol Superior i inferior
 		JLabel lnorte = new JLabel("Calculadora ITAcademi");
 		JLabel lsur = new JLabel("Copyright Todos los derechos reservados");
 
@@ -67,6 +67,8 @@ public class Calculadora extends JFrame {
 		JButton ms = new JButton("MS");
 		JButton mr = new JButton("MR");
 		JButton mc = new JButton("MC");
+		JButton arrelquadrada = new JButton("√₂");
+		JButton exponencial = new JButton("xⁿ");
 
 		JList lista = new JList();
 		JComboBox combo = new JComboBox();
@@ -74,7 +76,7 @@ public class Calculadora extends JFrame {
 
 		// Combo borrar llista
 
-		combo.addItem("Escoge una oprci�n");
+		combo.addItem("Escull una oprción");
 		combo.addItem("borrar lista");
 
 		Container cp = getContentPane();
@@ -124,7 +126,9 @@ public class Calculadora extends JFrame {
 		p3.add(ms);
 		p3.add(mr);
 		p3.add(mc);
-		p4.add(lista);
+		p4.add(arrelquadrada);
+		p4.add(exponencial);
+		p5.add(lista);
 		p5.add(Lbl4);
 		p6.add(combo);
 		p6.add(jta);
@@ -135,9 +139,9 @@ public class Calculadora extends JFrame {
 
 		suma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int suma = 0;
-				suma = Integer.valueOf(campo1.getText()) + Integer.valueOf(campo2.getText());
-				resultado.setText(Integer.toString(suma));
+				Double suma = 0.0;
+				suma = Double.valueOf(campo1.getText()) + Double.valueOf(campo2.getText());
+				resultado.setText(Double.toString(suma));
 				String p = campo1.getText() + "+" + campo2.getText() + "=" + resultado.getText();
 				datos.add(p);
 				lista.setListData(datos);
@@ -146,9 +150,9 @@ public class Calculadora extends JFrame {
 
 		resta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int resta = 0;
-				resta = Integer.valueOf(campo1.getText()) - Integer.valueOf(campo2.getText());
-				resultado.setText(Integer.toString(resta));
+				Double resta = 0.0;
+				resta = Double.valueOf(campo1.getText()) - Double.valueOf(campo2.getText());
+				resultado.setText(Double.toString(resta));
 				String p = campo1.getText() + "-" + campo2.getText() + "=" + resultado.getText();
 				datos.add(p);
 				lista.setListData(datos);
@@ -157,9 +161,9 @@ public class Calculadora extends JFrame {
 
 		mult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int multi = 0;
-				multi = Integer.valueOf(campo1.getText()) * Integer.valueOf(campo2.getText());
-				resultado.setText(Integer.toString(multi));
+				Double multi = 0.0;
+				multi = Double.valueOf(campo1.getText()) * Double.valueOf(campo2.getText());
+				resultado.setText(Double.toString(multi));
 				String p = campo1.getText() + "X" + campo2.getText() + "=" + resultado.getText();
 				datos.add(p);
 				lista.setListData(datos);
@@ -168,9 +172,9 @@ public class Calculadora extends JFrame {
 
 		div.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int divi = 0;
-				divi = Integer.valueOf(campo1.getText()) / Integer.valueOf(campo2.getText());
-				resultado.setText(Integer.toString(divi));
+				Double divi = 0.0;
+				divi = Double.valueOf(campo1.getText()) / Double.valueOf(campo2.getText());
+				resultado.setText(Double.toString(divi));
 				String p = campo1.getText() + "/" + campo2.getText() + "=" + resultado.getText();
 				datos.add(p);
 				lista.setListData(datos);
@@ -179,9 +183,9 @@ public class Calculadora extends JFrame {
 
 		modul.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int modul = 0;
-				modul = Integer.valueOf(campo1.getText()) % Integer.valueOf(campo2.getText());
-				resultado.setText(Integer.toString(modul));
+				Double modul = 0.0;
+				modul = Double.valueOf(campo1.getText()) % Double.valueOf(campo2.getText());
+				resultado.setText(Double.toString(modul));
 				String p = campo1.getText() + "%" + campo2.getText() + "=" + resultado.getText();
 				datos.add(p);
 				lista.setListData(datos);
@@ -231,7 +235,7 @@ public class Calculadora extends JFrame {
 					campo2.setName("0");
 				} else {
 					Mcampo1 = campo1.getText();
-					//Mcampo1 = Integer.valueOf(campo1.getText());
+
 				}
 
 				if (campo2.getText() == "") {
@@ -250,26 +254,45 @@ public class Calculadora extends JFrame {
 		// Invocar memoria
 		mr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				campo1.setText(Mcampo1);
 				campo2.setText(Mcampo2);
 
-				//p1.add(campo1);
-				//p1.add(campo2);
-				// campo1.setText((Integer.toString(Mcampo1));
-				// campo2.setText("");
-
-				/*
-				 * if (campo1.getText()=="") { campo2.setName("0"); }else { Mcampo1 =
-				 * Integer.valueOf(campo1.getText()); }
-				 * 
-				 * if (campo2.getText()=="") { campo2.setName("0"); }else { Mcampo2 =
-				 * Integer.valueOf(campo2.getText()); }
-				 */
-
-				// Verif consola
-
 				System.out.println(Mcampo1 + "-" + Mcampo2);
+			}
+
+		});
+
+		// Arrel quadrada
+		arrelquadrada.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Double raiz = 0.0;
+				raiz = (Double) Math.sqrt(Double.valueOf(campo1.getText()));
+
+				campo2.setText("0");
+
+				resultado.setText(Double.toString(raiz));
+				String p = "√₂ de : " + campo1.getText() + "=" + resultado.getText();
+				datos.add(p);
+				lista.setListData(datos);
+
+			}
+
+		});
+
+		// Exponencial
+		exponencial.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				Double expo = 0.0;
+				expo = (Double) Math.pow(Double.valueOf(campo1.getText()), Double.valueOf(campo2.getText()));
+
+				resultado.setText(Double.toString(expo));
+				String p = campo1.getText() + "^" + campo2.getText() + "=" + resultado.getText();
+				datos.add(p);
+				lista.setListData(datos);
+
 			}
 
 		});
